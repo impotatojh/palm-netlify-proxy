@@ -5,6 +5,7 @@ const axios = require('axios');
 
 exports.handler = async (event, context) => {
   try {
+    console.log(event.body);
     const response = await axios.post('https://generativelanguage.googleapis.com', event.body);
 
     return {
