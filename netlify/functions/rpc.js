@@ -1,5 +1,3 @@
-import { Context } from "@netlify/edge-functions";
-
 // functions/rpc.js
 const axios = require('axios');
 
@@ -19,4 +17,3 @@ exports.handler = async (event, context) => {
     };
   }
 };
-
