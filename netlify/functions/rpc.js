@@ -1,6 +1,21 @@
 import { Context } from "@netlify/edge-functions";
 
+// functions/rpc.js
+const axios = require('axios');
+
 exports.handler = async (event, context) => {
-  // 处理RPC请求的逻辑
-  return event;
+  try {
+    const response = await axios.post('https://generativelanguage.googleapis.com', event.body);
+
+    return {
+      statusCode: response.status,
+      body: JSON.stringify(response.data),
+    };
+  } catch (error) {
+    return {
+      statusCode: error.response.status,
+      body: JSON.stringify({ error: error.message }),
+    };
+  }
 };
+
