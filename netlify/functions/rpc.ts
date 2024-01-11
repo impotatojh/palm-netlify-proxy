@@ -1,9 +1,10 @@
-// functions/rpc.js
-const axios = require('axios');
+// functions/rpc.ts
+import { Handler } from '@netlify/functions';
+import axios from 'axios';
 
-exports.handler = async (event, context) => {
+const handler: Handler = async (event, context) => {
+  console.log(event.body);
   try {
-    console.log(event.body);
     const response = await axios.post('https://generativelanguage.googleapis.com', event.body);
 
     return {
@@ -17,3 +18,5 @@ exports.handler = async (event, context) => {
     };
   }
 };
+
+export { handler };
