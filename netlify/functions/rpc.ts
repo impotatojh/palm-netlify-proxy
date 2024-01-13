@@ -44,7 +44,7 @@ export default async (request: Request, context: Context) => {
     headers,
   });
 
-  console.log(222, searchParamss);
+  console.log(222, searchParams);
   console.log(333, response.body);
 
   const responseHeaders = {
