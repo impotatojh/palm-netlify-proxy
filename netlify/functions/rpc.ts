@@ -26,7 +26,6 @@ export default async (request: Request, context: Context) => {
   }
 
   const { pathname, searchParams } = new URL(request.url);
-  console.log(111, pathname, searchParams);
 
   const url = new URL(pathname, "https://generativelanguage.googleapis.com");
   searchParams.delete("_path");
@@ -44,16 +43,13 @@ export default async (request: Request, context: Context) => {
     headers,
   });
 
-  console.log(222, searchParams);
-  console.log(333, response.body);
-  console.log(444, response.headers);
-
   const responseHeaders = {
     ...CORS_HEADERS,
     "content-type": "application/grpc",
     "content-encoding": null
   };
 
+  console.log(111, responseHeaders);
   return new Response(response.body, {
     headers: responseHeaders,
     status: response.status
