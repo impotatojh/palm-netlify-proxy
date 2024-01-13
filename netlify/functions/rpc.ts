@@ -1,7 +1,7 @@
 var getRawData = function(req) {
  var raw = req.method + ' ' + req.url + ' HTTP/1.1';
- for (var i = 0; i < req.rawHeaders.length; i+=2) {
-   raw += '\r\n' + req.rawHeaders[i] + ': ' + req.rawHeaders[i+1];
+ for (var i = 0; i < req.headers.length; i+=2) {
+   raw += '\r\n' + req.headers[i] + ': ' + req.headers[i+1];
  }
 
  if (req.body) {
