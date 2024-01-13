@@ -28,7 +28,7 @@ export default async (request: Request, context: Context) => {
   }
 
   const { pathname, searchParams } = new URL(request.url);
-  console.log(111, pathname);
+  console.log(111, request);
   const url = new URL(pathname, "https://generativelanguage.googleapis.com");
   searchParams.delete("_path");
 
@@ -43,7 +43,6 @@ export default async (request: Request, context: Context) => {
 
   try {
     const response = await axios.get('generativelanguage.googleapis.com:443', {headers});
-    console.log(222, request.url, response);
 
     return response;
   } catch (error) {
