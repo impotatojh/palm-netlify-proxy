@@ -28,7 +28,7 @@ export default async (request: Request, context: Context) => {
   }
 
   const { pathname, searchParams } = new URL(request.url);
-
+  console.log(111, pathname);
   const url = new URL(pathname, "https://generativelanguage.googleapis.com");
   searchParams.delete("_path");
 
