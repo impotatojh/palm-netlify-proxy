@@ -42,7 +42,7 @@ export default async (request: Request, context: Context) => {
   }
 
   try {
-    const response = await axios.get(url, {headers});
+    const response = await axios.get('generativelanguage.googleapis.com:443', {headers});
     console.log(222, request.url, response);
 
     return response;
