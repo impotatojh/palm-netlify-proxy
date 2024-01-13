@@ -44,11 +44,11 @@ export default async (request: Request, context: Context) => {
   });
 
   const responseHeaders = {
-    ...CORS_HEADERS,
+    // ...CORS_HEADERS,
     ...Object.fromEntries(response.headers),
-    "content-type": "application/grpc",
-    "grpc-status": 0,
-    "grpc-message": "OK"
+    // "content-type": "application/grpc",
+    // "grpc-status": 0,
+    // "grpc-message": "OK"
 };
 
   console.log(111, headers, responseHeaders);
