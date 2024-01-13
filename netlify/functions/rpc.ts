@@ -46,6 +46,7 @@ export default async (request: Request, context: Context) => {
 
   console.log(222, searchParams);
   console.log(333, response.body);
+  console.log(444, response.header);
 
   const responseHeaders = {
     ...CORS_HEADERS,
