@@ -51,7 +51,7 @@ export default async (request: Request, context: Context) => {
     "grpc-message": "OK"
 };
 
-  console.log(111, responseHeaders);
+  console.log(111, headers, responseHeaders);
   return new Response(response.body, {
     headers: responseHeaders,
     status: response.status
