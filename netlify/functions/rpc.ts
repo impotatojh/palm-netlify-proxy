@@ -1,16 +1,60 @@
-var getRawData = function(req) {
- var raw = req.method + ' ' + req.url + ' HTTP/1.1';
- for (var i = 0; i < req.headers.length; i+=2) {
-   raw += '\r\n' + req.headers[i] + ': ' + req.headers[i+1];
- }
+const pickHeaders = (headers: Headers, keys: (string | RegExp)[]): Headers => {
+  const picked = new Headers();
+  for (const key of headers.keys()) {
+    if (keys.some((k) => (typeof k === "string" ? k === key : k.test(key)))) {
+      const value = headers.get(key);
+      if (typeof value === "string") {
+        picked.set(key, value);
+      }
+    }
+  }
+  return picked;
+};
 
- if (req.body) {
-   raw += '\r\n\r\n' + req.body;
- }
+const CORS_HEADERS: Record<string, string> = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "*",
+  "access-control-allow-headers": "*",
+};
 
- return raw;
-}
+export default async (request: Request, context: Context) => {
 
-export default async (request, context) => {
-  console.log(444, getRawData(request));
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      headers: CORS_HEADERS,
+    });
+  }
+
+  const { pathname, searchParams } = new URL(request.url);
+  console.log(111, pathname, searchParams);
+
+  const url = new URL(pathname, "https://generativelanguage.googleapis.com");
+  searchParams.delete("_path");
+
+  searchParams.forEach((value, key) => {
+    url.searchParams.append(key, value);
+  });
+
+  const headers = pickHeaders(request.headers, ["content-type", "x-goog-api-client", "x-goog-api-key", "accept-encoding"]);
+
+  const response = await fetch(url, {
+    body: request.body,
+    method: request.method,
+    duplex: 'half',
+    headers,
+  });
+
+  console.log(222, searchParamss);
+  console.log(333, response.body);
+
+  const responseHeaders = {
+    ...CORS_HEADERS,
+    ...Object.fromEntries(response.headers),
+    "content-encoding": null
+  };
+
+  return new Response(response.body, {
+    headers: responseHeaders,
+    status: response.status
+  });
 };
