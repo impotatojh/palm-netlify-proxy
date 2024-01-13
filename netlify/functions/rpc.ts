@@ -36,11 +36,11 @@ export default async (request: Request, context: Context) => {
 
   let headers = pickHeaders(request.headers, ["content-type", "x-goog-api-client", "x-goog-api-key", "accept-encoding"]);
 
-  return await fetch(url, {
-    body: request.body,
+  const res = await fetch(url, {
     method: request.method,
-    duplex: 'half',
-    headers,
+    headers: request.headers,
   });
+  console.log(111, res);
+  return res;
 
 };
