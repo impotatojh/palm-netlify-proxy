@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const pickHeaders = (headers: Headers, keys: (string | RegExp)[]): Headers => {
   const picked = new Headers();
   for (const key of headers.keys()) {
@@ -36,11 +38,13 @@ export default async (request: Request, context: Context) => {
 
   let headers = pickHeaders(request.headers, ["content-type", "x-goog-api-client", "x-goog-api-key", "accept-encoding"]);
 
-  const res = await fetch(url, {
-    method: request.method,
-    headers: request.headers,
-  });
-  console.log(111, res);
-  return res;
+  try {
+    const response = await axios.get(url);
+    console.log(222, response);
+
+    return response;
+  } catch (error) {
+    console.log(333, error);
+  }
 
 };
