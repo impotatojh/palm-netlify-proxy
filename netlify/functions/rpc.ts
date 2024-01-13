@@ -44,18 +44,8 @@ export default async (request: Request, context: Context) => {
   });
 
   headers = pickHeaders(response.headers, ["alt-svc", "content-type", "date", "server-timing", "transfer-encoding"]);
-  const responseHeaders = {
-    // ...CORS_HEADERS,
-    ...headers,
-    // "content-type": "application/grpc",
-    // "grpc-status": 0,
-    // "grpc-message": "OK"
-  };
-
-  console.log(222, headers, responseHeaders);
+  console.log(222, headers, response.status);
   return new Response(response.body, {
-    // headers: responseHeaders,
-    headers,
-    status: response.status
+    headers
   });
 };
