@@ -34,7 +34,7 @@ export default async (request: Request, context: Context) => {
     url.searchParams.append(key, value);
   });
 
-  const headers = pickHeaders(request.headers, ["content-type", "x-goog-api-client", "x-goog-api-key", "accept-encoding"]);
+  let headers = pickHeaders(request.headers, ["content-type", "x-goog-api-client", "x-goog-api-key", "accept-encoding"]);
 
   const response = await fetch(url, {
     body: request.body,
@@ -43,13 +43,14 @@ export default async (request: Request, context: Context) => {
     headers,
   });
 
+  headers = pickHeaders(response.headers, ["alt-svc", "content-type", "date", "server-timing", "transfer-encoding"]);
   const responseHeaders = {
     // ...CORS_HEADERS,
-    ...Object.fromEntries(response.headers),
+    ...headers,
     // "content-type": "application/grpc",
     // "grpc-status": 0,
     // "grpc-message": "OK"
-};
+  };
 
   console.log(111, headers, responseHeaders);
   return new Response(response.body, {
