@@ -1,16 +1,14 @@
-import { Context } from "@netlify/edge-functions";
-
 var getRawData = function(req) {
- var raw = req.method + ' ' + req.url + ' HTTP/1.1'
+ var raw = req.method + ' ' + req.url + ' HTTP/1.1';
  for (var i = 0; i < req.rawHeaders.length; i+=2) {
-   raw += '\r\n' + req.rawHeaders[i] + ': ' + req.rawHeaders[i+1]
+   raw += '\r\n' + req.rawHeaders[i] + ': ' + req.rawHeaders[i+1];
  }
 
  if (req.body) {
-   raw += '\r\n\r\n' + req.body
+   raw += '\r\n\r\n' + req.body;
  }
 
- return raw
+ return raw;
 }
 
 export default async (request, context) => {
