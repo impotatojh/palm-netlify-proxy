@@ -52,9 +52,10 @@ export default async (request: Request, context: Context) => {
     // "grpc-message": "OK"
   };
 
-  console.log(111, headers, responseHeaders);
+  console.log(222, headers, responseHeaders);
   return new Response(response.body, {
-    headers: responseHeaders,
+    // headers: responseHeaders,
+    headers,
     status: response.status
   });
 };
