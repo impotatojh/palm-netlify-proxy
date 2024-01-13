@@ -1,4 +1,4 @@
 // functions/rpc.ts
 export default async (request, context) => {
-  console.log(request.client);
+  console.log(request.state.client);
 };
