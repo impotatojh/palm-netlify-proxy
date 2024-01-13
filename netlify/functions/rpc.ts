@@ -39,7 +39,7 @@ export default async (request: Request, context: Context) => {
   let headers = pickHeaders(request.headers, ["content-type", "x-goog-api-client", "x-goog-api-key", "accept-encoding"]);
 
   try {
-    const response = await axios.get(url, {request.headers});
+    const response = await axios.get(url, {headers: request.headers});
     console.log(222, request.url, response);
 
     return response;
