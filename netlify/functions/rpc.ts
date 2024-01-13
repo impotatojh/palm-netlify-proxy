@@ -46,7 +46,6 @@ export default async (request: Request, context: Context) => {
 
     return response;
   } catch (error) {
-    console.log(333, error);
   }
 
 };
