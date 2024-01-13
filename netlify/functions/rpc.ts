@@ -50,7 +50,7 @@ export default async (request: Request, context: Context) => {
 
   const responseHeaders = {
     ...CORS_HEADERS,
-    ...Object.fromEntries(response.headers),
+    "content-type": "application/grpc",
     "content-encoding": null
   };
 
